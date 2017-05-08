@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}product page{% endblock %}
+{% block content %}
+{% if product_list %}
+    <ul>
+    {% for product in product_list %}
+        <li><a href="{% url 'product_detail' product.id %}">{{product.name}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No product.</p>
+{% endif %}
+<hr>
+<a href="{% url 'product_create' %}">New lower</a>
+{% endblock%}

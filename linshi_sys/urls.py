@@ -28,4 +28,7 @@ urlpatterns = [
     url(r'^product$', views.ProductIndexView.as_view(), name='product_index'),
     url(r'^product/(?P<product_id>\d+)/$', views.product_detail_view, name='product_detail'),
     url(r'^product_create$', views.create_product_view, name='product_create'),
+    url(r'^material$',views.MaterialIndexView.as_view(),name='material_index'),
+    url(r'material/(?P<material_id>\d+)/$',views.material_detail_view,name='material_detail'),
+    url(r'material_create$',views.create_material_view,name='material_create'),
 ]

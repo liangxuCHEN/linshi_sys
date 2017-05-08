@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}material page{% endblock %}
+{% block content %}
+{% if material_list %}
+    <ul>
+    {% for material in material_list %}
+        <li><a href="{% url 'material_detail' material.id %}">{{material.name}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No material.</p>
+{% endif %}
+<hr>
+<a href="{% url 'material_create' %}">New material</a>
+{% endblock %}

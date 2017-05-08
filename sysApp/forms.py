@@ -48,7 +48,8 @@ class UserForm(forms.ModelForm):
         )
         new_user.first_name = self.cleaned_data['first_name']
         new_user.last_name = self.cleaned_data['last_name']
-        new_user.is_active = False
+        new_user.is_active = True
+        new_user.is_staff = True
         new_user.save()
 
     class Meta:

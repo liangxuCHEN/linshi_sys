@@ -9,6 +9,8 @@ from sysApp.models import MyUser, Product, Material
 from sysApp.forms import UserForm, ProductForm, MaterialForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
+from django.contrib import auth
+
 
 def my_view(request):
     if request.user.is_authenticated():
@@ -16,7 +18,6 @@ def my_view(request):
         output += str(request.user.username)
     else:
         output = "welcome"
-    
     return HttpResponse(output)
 
 
@@ -92,3 +93,31 @@ def create_product_view(request):
 
 
 # TODO: 做材料商的CRUD， 参考product
+class MaterialIndexView(generic.ListView):
+    model = Material
+    template_name = "material_index.html"
+    context_object_name = "material_list"
+
+def material_detail_view(reqeust,material_id):
+    material = get_object_or_404(Material,pk=material_id)
+    return render(reqeust,'material_detail.html',{'material':material})
+
+def create_material_view(reqeust):
+    if reqeust.user.has_perm('sysApp.add_material'):
+        if reqeust.method == 'POST':
+            data = reqeust.POST
+            form = MaterialForm(data)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('material')
+            else:
+                return render(reqeust,'material_create.html',{'form':form})
+        else:
+            form = MaterialForm()
+            content = {
+                "form":form
+            }
+            return render(reqeust,'material_create.html',content)
+    else:
+        return redirect('login')
+

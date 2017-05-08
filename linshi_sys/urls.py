@@ -19,12 +19,13 @@ from sysApp import views
 from django.views.generic import TemplateView
 
 urlpatterns = [
-	url(r'^$', TemplateView.as_view(template_name="index.html")),
-    url(r'^user_create$', views.CreateUserView, name='user_create'),
-    url(r'^login$', views.LoginView, name='login'),
-    url(r'^logout$', views.LogoutView, name='logout'),
+    url(r'^$', TemplateView.as_view(template_name="index.html")),
+    url(r'^user_create$', views.create_user_view, name='user_create'),
+    url(r'^login$', views.login_view, name='login'),
+    url(r'^logout$', views.logout_view, name='logout'),
+    url(r'^test$', views.my_view),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^product$', views.ProductIndexView.as_view(), name='product_index'),
-    url(r'^product/(?P<product_id>\d+)/$', views.productDetailView, name='product_detail'),
-    url(r'^product_create$', views.createproductView, name='product_create'),
+    url(r'^product/(?P<product_id>\d+)/$', views.product_detail_view, name='product_detail'),
+    url(r'^product_create$', views.create_product_view, name='product_create'),
 ]

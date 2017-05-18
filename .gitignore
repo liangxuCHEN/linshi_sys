@@ -1,0 +1,8 @@
+*.pyc
+*.log
+.idea/
+*.png
+*.txt
+db.sqlite3
+static/
+sysApp/migrations/
